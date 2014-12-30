@@ -4,14 +4,13 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>生活·工作·娱乐</title>
+    <title>cookie和session介绍 | 生活·工作·娱乐</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Daniel Cai">
     
-    <meta name="description" content="cookie和session 介绍
-为什么要设计cookie
-我们知道现代的web应用都构建在http协议之上的，然而http协议是一个无状态协议。什么叫做无状态呢，就是你客户端发送一个请求给http服务器端，那么我服务器端就根据你的请求给你生成相应的结果然后发送给你。所以服务器端不知道请求是哪一个">
+    <meta name="description" content="为什么要设计cookie
+我们知道现代的web应用都构建在http协议之上的，然而http协议是一个无状态协议。什么叫做无状态呢，就是你客户端发送一个请求给http服务器端，那么我服务器端就根据你的请求给你生成相应的结果然后发送给你。所以服务器端不知道请求是哪一个客户端发出的。而随着web应用复杂度">
     
     
     
@@ -72,14 +71,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2014/12/30/cookie-session-introduction/" title="" itemprop="url"></a>
+      <a href="/2014/12/30/cookie-session-introduction/" title="cookie和session介绍" itemprop="url">cookie和session介绍</a>
   </h1>
   <p class="article-author">By
        
 		<a href="http://ruhaishuo.com/about" title="Daniel Cai" target="_blank" itemprop="author">Daniel Cai</a>
 		
   <p class="article-time">
-    <time datetime="2014-12-30T09:52:11.000Z" itemprop="datePublished"> 发表于 12月 30 2014</time>
+    <time datetime="2014-12-30T09:30:20.000Z" itemprop="datePublished"> 发表于 12月 30 2014</time>
     
   </p>
 </header>
@@ -88,12 +87,11 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#cookie和session_介绍"><span class="toc-number">1.</span> <span class="toc-text">cookie和session 介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么要设计cookie"><span class="toc-number">1.1.</span> <span class="toc-text">为什么要设计cookie</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#直观显示cookie"><span class="toc-number">1.2.</span> <span class="toc-text">直观显示cookie</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何生成cookie"><span class="toc-number">1.3.</span> <span class="toc-text">如何生成cookie</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#在客户端生成cookie"><span class="toc-number">1.3.1.</span> <span class="toc-text">在客户端生成cookie</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在服务器端生成cookie"><span class="toc-number">1.3.2.</span> <span class="toc-text">在服务器端生成cookie</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cookie属性分析"><span class="toc-number">1.4.</span> <span class="toc-text">cookie属性分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么要设计session"><span class="toc-number">1.5.</span> <span class="toc-text">为什么要设计session</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#session的实现"><span class="toc-number">1.6.</span> <span class="toc-text">session的实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cookie和session的应用"><span class="toc-number">1.7.</span> <span class="toc-text">cookie和session的应用</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么要设计cookie"><span class="toc-number">1.</span> <span class="toc-text">为什么要设计cookie</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#直观显示cookie"><span class="toc-number">2.</span> <span class="toc-text">直观显示cookie</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何生成cookie"><span class="toc-number">3.</span> <span class="toc-text">如何生成cookie</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#在客户端生成cookie"><span class="toc-number">3.1.</span> <span class="toc-text">在客户端生成cookie</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在服务器端生成cookie"><span class="toc-number">3.2.</span> <span class="toc-text">在服务器端生成cookie</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cookie属性分析"><span class="toc-number">4.</span> <span class="toc-text">cookie属性分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么要设计session"><span class="toc-number">5.</span> <span class="toc-text">为什么要设计session</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#session的实现"><span class="toc-number">6.</span> <span class="toc-text">session的实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cookie和session的应用"><span class="toc-number">7.</span> <span class="toc-text">cookie和session的应用</span></a></li></ol>
 		
 		</div>
 		
-		<h1 id="cookie和session_介绍">cookie和session 介绍</h1>
-<h2 id="为什么要设计cookie">为什么要设计cookie</h2>
+		<h2 id="为什么要设计cookie">为什么要设计cookie</h2>
 <p>我们知道现代的web应用都构建在<a href="http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol" target="_blank" rel="external">http</a>协议之上的，然而http协议是一个无状态协议。什么叫做无状态呢，就是你客户端发送一个请求给http服务器端，那么我服务器端就根据你的请求给你生成相应的结果然后发送给你。所以服务器端不知道请求是哪一个客户端发出的。而随着web应用复杂度越来越高，服务器端需要记住客户端状态的需求必须得到满足。譬如我们常见的电子商务网站，如果不记住客户端的信息，服务端怎么知道哪个用户买了什么东西，总共的价格是多少，不记住这些信息后果很严重，乱扣掉用户的钱，张三买的东西算作李四的。基于这样的需求，客户端发送请求给服务端时，如果想要服务端识别出自己是谁，就需要增加一些额外的信息在请求中。这个额外的信息我们就称作cookie.</p>
 <h2 id="直观显示cookie">直观显示cookie</h2>
 <p>下图是访问维基百科时候，浏览器发送请求时的截图。从图中我们可以看到浏览器向维基百科的服务器发送了一系列的cookie数据。这样维基百科的服务器接收到这些数据，就会根据这些数据做出相应的操作。<br><img src="http://7te8l5.com1.z0.glb.clouddn.com/cookie-session-1.png" alt="cookie"></p>
@@ -143,13 +141,23 @@
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/技术/">技术</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/技术/">技术</a>
+  </div>
 
 </div>
 
 
 <div class="article-share" id="share">
 
-  <div data-url="http://ruhaishuo.com/2014/12/30/cookie-session-introduction/" data-title="生活·工作·娱乐" data-tsina="1248213271" class="share clearfix">
+  <div data-url="http://ruhaishuo.com/2014/12/30/cookie-session-introduction/" data-title="cookie和session介绍 | 生活·工作·娱乐" data-tsina="1248213271" class="share clearfix">
   </div>
 
 </div>
@@ -181,7 +189,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#cookie和session_介绍"><span class="toc-number">1.</span> <span class="toc-text">cookie和session 介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么要设计cookie"><span class="toc-number">1.1.</span> <span class="toc-text">为什么要设计cookie</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#直观显示cookie"><span class="toc-number">1.2.</span> <span class="toc-text">直观显示cookie</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何生成cookie"><span class="toc-number">1.3.</span> <span class="toc-text">如何生成cookie</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#在客户端生成cookie"><span class="toc-number">1.3.1.</span> <span class="toc-text">在客户端生成cookie</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在服务器端生成cookie"><span class="toc-number">1.3.2.</span> <span class="toc-text">在服务器端生成cookie</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cookie属性分析"><span class="toc-number">1.4.</span> <span class="toc-text">cookie属性分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么要设计session"><span class="toc-number">1.5.</span> <span class="toc-text">为什么要设计session</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#session的实现"><span class="toc-number">1.6.</span> <span class="toc-text">session的实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cookie和session的应用"><span class="toc-number">1.7.</span> <span class="toc-text">cookie和session的应用</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么要设计cookie"><span class="toc-number">1.</span> <span class="toc-text">为什么要设计cookie</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#直观显示cookie"><span class="toc-number">2.</span> <span class="toc-text">直观显示cookie</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何生成cookie"><span class="toc-number">3.</span> <span class="toc-text">如何生成cookie</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#在客户端生成cookie"><span class="toc-number">3.1.</span> <span class="toc-text">在客户端生成cookie</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在服务器端生成cookie"><span class="toc-number">3.2.</span> <span class="toc-text">在服务器端生成cookie</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cookie属性分析"><span class="toc-number">4.</span> <span class="toc-text">cookie属性分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么要设计session"><span class="toc-number">5.</span> <span class="toc-text">为什么要设计session</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#session的实现"><span class="toc-number">6.</span> <span class="toc-text">session的实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cookie和session的应用"><span class="toc-number">7.</span> <span class="toc-text">cookie和session的应用</span></a></li></ol>
  
   </div>
 
@@ -202,6 +210,8 @@
 		
 			<li><a href="/categories/工具/" title="工具">工具<sup>1</sup></a></li>
 		
+			<li><a href="/categories/技术/" title="技术">技术<sup>1</sup></a></li>
+		
 			<li><a href="/categories/生活/" title="生活">生活<sup>1</sup></a></li>
 		
 			<li><a href="/categories/电影/" title="电影">电影<sup>1</sup></a></li>
@@ -216,6 +226,8 @@
 		<ul class="clearfix">
 		
 			<li><a href="/tags/学习/" title="学习">学习<sup>3</sup></a></li>
+		
+			<li><a href="/tags/技术/" title="技术">技术<sup>1</sup></a></li>
 		
 			<li><a href="/tags/电影/" title="电影">电影<sup>1</sup></a></li>
 		

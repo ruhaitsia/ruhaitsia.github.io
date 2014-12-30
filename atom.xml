@@ -4,7 +4,7 @@
   <subtitle><![CDATA[独立思考，热爱分享，微信公众号［如海说］]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://ruhaishuo.com/"/>
-  <updated>2014-12-30T09:52:26.050Z</updated>
+  <updated>2014-12-30T09:55:54.699Z</updated>
   <id>http://ruhaishuo.com/</id>
   
   <author>
@@ -15,13 +15,12 @@
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
   
   <entry>
-    <title><![CDATA[]]></title>
+    <title><![CDATA[cookie和session介绍]]></title>
     <link href="http://ruhaishuo.com/2014/12/30/cookie-session-introduction/"/>
     <id>http://ruhaishuo.com/2014/12/30/cookie-session-introduction/</id>
-    <published>2014-12-30T09:52:11.000Z</published>
-    <updated>2014-12-30T09:51:56.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="cookie和session_介绍">cookie和session 介绍</h1>
-<h2 id="为什么要设计cookie">为什么要设计cookie</h2>
+    <published>2014-12-30T09:30:20.000Z</published>
+    <updated>2014-12-30T09:55:01.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="为什么要设计cookie">为什么要设计cookie</h2>
 <p>我们知道现代的web应用都构建在<a href="http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol" target="_blank" rel="external">http</a>协议之上的，然而http协议是一个无状态协议。什么叫做无状态呢，就是你客户端发送一个请求给http服务器端，那么我服务器端就根据你的请求给你生成相应的结果然后发送给你。所以服务器端不知道请求是哪一个客户端发出的。而随着web应用复杂度越来越高，服务器端需要记住客户端状态的需求必须得到满足。譬如我们常见的电子商务网站，如果不记住客户端的信息，服务端怎么知道哪个用户买了什么东西，总共的价格是多少，不记住这些信息后果很严重，乱扣掉用户的钱，张三买的东西算作李四的。基于这样的需求，客户端发送请求给服务端时，如果想要服务端识别出自己是谁，就需要增加一些额外的信息在请求中。这个额外的信息我们就称作cookie.</p>
 <h2 id="直观显示cookie">直观显示cookie</h2>
 <p>下图是访问维基百科时候，浏览器发送请求时的截图。从图中我们可以看到浏览器向维基百科的服务器发送了一系列的cookie数据。这样维基百科的服务器接收到这些数据，就会根据这些数据做出相应的操作。<br><img src="http://7te8l5.com1.z0.glb.clouddn.com/cookie-session-1.png" alt="cookie"></p>
@@ -68,10 +67,13 @@
 <p>当然这样的应用还有很多，通过cookie和session我们可以将http这样的无状态协议发挥出更大的功能。</p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<h1 id="cookie和session_介绍">cookie和session 介绍</h1>
-<h2 id="为什么要设计cookie">为什么要设计cookie</h2>
-<p>我们知道现代的web应用都构建在<a href="http://en.wikipedia.or]]>
+    <![CDATA[<h2 id="为什么要设计cookie">为什么要设计cookie</h2>
+<p>我们知道现代的web应用都构建在<a href="http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol" target="_blank]]>
     </summary>
+    
+      <category term="技术" scheme="http://ruhaishuo.com/tags/%E6%8A%80%E6%9C%AF/"/>
+    
+      <category term="技术" scheme="http://ruhaishuo.com/categories/%E6%8A%80%E6%9C%AF/"/>
     
   </entry>
   
