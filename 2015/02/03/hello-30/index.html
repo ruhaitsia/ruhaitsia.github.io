@@ -4,13 +4,12 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>cookie和session介绍 | 生活·工作·娱乐</title>
+    <title>三十,你好 | 生活·工作·娱乐</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Daniel Cai">
     
-    <meta name="description" content="为什么要设计cookie
-我们知道现代的web应用都构建在http协议之上的，然而http协议是一个无状态协议。什么叫做无状态呢，就是你客户端发送一个请求给http服务器端，那么我服务器端就根据你的请求给你生成相应的结果然后发送给你。所以服务器端不知道请求是哪一个客户端发出的。而随着web应用复杂度">
+    <meta name="description" content="那一年我才三岁，像我女儿现在这样的年纪，活泼而且好动。秋天田里的麦子已经熟了，爸爸妈妈忙着收麦子，根本没有时间理会我，他们将一袋袋麦子装好摆在屋外的场地上。看着那一袋袋的麦子竖立在场地中央，我便来了兴趣，想要爬到口袋上去，因为个头太小，还没爬到袋子上，那一袋麦子就倒了下来，然后我就一个个口袋爬了过去">
     
     
     
@@ -71,14 +70,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2014/12/30/cookie-session-introduction/" title="cookie和session介绍" itemprop="url">cookie和session介绍</a>
+      <a href="/2015/02/03/hello-30/" title="三十,你好" itemprop="url">三十,你好</a>
   </h1>
   <p class="article-author">By
        
 		<a href="http://ruhaishuo.com/about" title="Daniel Cai" target="_blank" itemprop="author">Daniel Cai</a>
 		
   <p class="article-time">
-    <time datetime="2014-12-30T09:30:20.000Z" itemprop="datePublished"> 发表于 12月 30 2014</time>
+    <time datetime="2015-02-03T14:25:20.000Z" itemprop="datePublished"> 发表于 2月 3 2015</time>
     
   </p>
 </header>
@@ -87,55 +86,21 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么要设计cookie"><span class="toc-number">1.</span> <span class="toc-text">为什么要设计cookie</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#直观显示cookie"><span class="toc-number">2.</span> <span class="toc-text">直观显示cookie</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何生成cookie"><span class="toc-number">3.</span> <span class="toc-text">如何生成cookie</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#在客户端生成cookie"><span class="toc-number">3.1.</span> <span class="toc-text">在客户端生成cookie</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在服务器端生成cookie"><span class="toc-number">3.2.</span> <span class="toc-text">在服务器端生成cookie</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cookie属性分析"><span class="toc-number">4.</span> <span class="toc-text">cookie属性分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么要设计session"><span class="toc-number">5.</span> <span class="toc-text">为什么要设计session</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#session的实现"><span class="toc-number">6.</span> <span class="toc-text">session的实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cookie和session的应用"><span class="toc-number">7.</span> <span class="toc-text">cookie和session的应用</span></a></li></ol>
+			
 		
 		</div>
 		
-		<h2 id="为什么要设计cookie">为什么要设计cookie</h2>
-<p>我们知道现代的web应用都构建在<a href="http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol" target="_blank" rel="external">http</a>协议之上的，然而http协议是一个无状态协议。什么叫做无状态呢，就是你客户端发送一个请求给http服务器端，那么我服务器端就根据你的请求给你生成相应的结果然后发送给你。所以服务器端不知道请求是哪一个客户端发出的。而随着web应用复杂度越来越高，服务器端需要记住客户端状态的需求必须得到满足。譬如我们常见的电子商务网站，如果不记住客户端的信息，服务端怎么知道哪个用户买了什么东西，总共的价格是多少，不记住这些信息后果很严重，乱扣掉用户的钱，张三买的东西算作李四的。基于这样的需求，客户端发送请求给服务端时，如果想要服务端识别出自己是谁，就需要增加一些额外的信息在请求中。这个额外的信息我们就称作cookie.</p>
-<h2 id="直观显示cookie">直观显示cookie</h2>
-<p>下图是访问维基百科时候，浏览器发送请求时的截图。从图中我们可以看到浏览器向维基百科的服务器发送了一系列的cookie数据。这样维基百科的服务器接收到这些数据，就会根据这些数据做出相应的操作。<br><img src="http://7te8l5.com1.z0.glb.clouddn.com/cookie-session-1.png" alt="cookie"></p>
-<h2 id="如何生成cookie">如何生成cookie</h2>
-<p>我们看上图中的cookie，你会发现这些所谓的cookie就是一系列的键值对，再加上一些其他的属性，这些属性我们等会介绍。那么cookie是如何生成的呢。cookie生成的方式有两种，一种是在客户端生成，还有一种就是在服务器端生成。在客户端，这里我们说的客户端指的就是浏览器，我们可以通过调用文档对象document来生成cookie。</p>
-<h3 id="在客户端生成cookie">在客户端生成cookie</h3>
-<p>生成简单的键值对:</p>
-<p><code>document.cookie=&quot;username=John Doe&quot;;</code></p>
-<p>生成带有过期时间的cookie:</p>
-<p><code>document.cookie=&quot;username=John Doe; expires=Thu, 18 Dec 2013 12:00:00 UTC&quot;;</code></p>
-<p>生成带有路径的cookie:</p>
-<p><code>document.cookie=&quot;username=John Doe; expires=Thu, 18 Dec 2013 12:00:00 UTC; path=/&quot;;</code></p>
-<h3 id="在服务器端生成cookie">在服务器端生成cookie</h3>
-<p>服务器端生成cookie根据编程语言的不同，使用的方式不一样。但是都是操作http response对象产生cookie.下面以nodejs为例展示一下。res即是http response对象。</p>
-<p><code>res.cookie(&#39;rememberme&#39;, &#39;1&#39;, { expires: new Date(Date.now() + maxAge), httpOnly: true });</code></p>
-<h2 id="cookie属性分析">cookie属性分析</h2>
-<p>让我们再次回到前文中的截图，我们可以看到cookie本身有很多的属性，现在让我一一来解释一下这些属性的含义。</p>
-<ul>
-<li>name/value 这个没有什么好说的，就是该cookie本身的键值对，发送到服务器端，可以被服务器端拿到。</li>
-<li>domain 这个标识该cookie在哪个域名之下，只有在该域名之下才能访问到这个cookie。</li>
-<li>path 这个标识该cookie在哪个路径之下，因为我们在访问一个网站时，这个网站的文件是放在不同目录中的，如果cookie标识了它的path，那么只有在该path下，它才能被读取到。</li>
-<li>Expires/Max-Age 标识该cookie的生命周期，如果过期了，该cookie会被客户端删除掉，它也就不会被发送给服务器端了。</li>
-<li>size 标识了该cookie数据的大小，cookie的大小是有限制的。一般来说不能超过4k。</li>
-<li>http only 这个标识表示该cookie只能在http通道中传递，它不能被客户端读到或者被客户端的程序改变。</li>
-<li>secure 这个标识该cookie是否需要ssl加密传递</li>
-</ul>
-<h2 id="为什么要设计session">为什么要设计session</h2>
-<p>既然我们已经设计了cookie,cookie也可以帮助我们做很多事情，譬如建立客户端和服务器端识别机制，携带相应的客户端数据，那么我们为什么还要设计session呢？主要有以下几个原因。</p>
-<ul>
-<li>cookie能够携带的数据相对来说比较少，如果我们需要携带超过4k的数据，那么cookie就无能为力了。</li>
-<li>cookie存在客户端，这样用户容易篡改，有安全隐患。</li>
-<li>cookie能被客户端读取，给不法分子提供脚本攻击的可能。</li>
-</ul>
-<p>基于这些原因我们设计了session,所谓session，其实就是存在服务器端的cookie。我们将用户数据存到了服务器端。这样上面的几个弱点就可以被克服了。我们可以选择不同类型的介质存放session，我们可以存到数据库中，可以存到缓存中，当然也可以存放到文件中。</p>
-<h2 id="session的实现">session的实现</h2>
-<p>session的实现有好几种，我们这里只讲基于cookie的实现。当用户访问服务器的时候，服务器端产生一个cookie,前面我们提到cookie也是可以在服务器端中生成的。同时将这些信息存放在服务器端的介质中。该cookie是一个http only的cookie，客户端没有办法修改。cookie只存放少量的信息，过期时间，path等等，更多的信息我们放在session中。通过session id，我们可以将cookie和session关联起来。</p>
-<h2 id="cookie和session的应用">cookie和session的应用</h2>
-<p>通过cookie和session的配合我们就可以实现更加复杂的功能，下面列举出一些我们在开发中常见的应用。</p>
-<ul>
-<li>用户登录，并且让用户在过期时间前一直可以登录该系统。</li>
-<li>用户页面定制化，根据存在在cookie和session中的数据对用户界面定制。</li>
-<li>用户在电子商务网站上购物，然后换到另一个环境譬如从公司回家，还可以继续操作已选的商品。</li>
-</ul>
-<p>当然这样的应用还有很多，通过cookie和session我们可以将http这样的无状态协议发挥出更大的功能。</p>
+		<p><img src="http://7te8l5.com1.z0.glb.clouddn.com/30.jpg" alt="三十"></p>
+<p>那一年我才三岁，像我女儿现在这样的年纪，活泼而且好动。秋天田里的麦子已经熟了，爸爸妈妈忙着收麦子，根本没有时间理会我，他们将一袋袋麦子装好摆在屋外的场地上。看着那一袋袋的麦子竖立在场地中央，我便来了兴趣，想要爬到口袋上去，因为个头太小，还没爬到袋子上，那一袋麦子就倒了下来，然后我就一个个口袋爬了过去，结果所有的麦子全部洒落出来。我爸看到了，气急败坏地把我拎到屋里，拿起他做木匠用的斧头，我一下子就给吓懵了。哇哇大哭起来，那是我第一次体会到了父亲的威严。其实在我的记忆中，爸爸就那一次对我很凶，以后一直是非常慈爱的形象。但是那一次让我知道了做错事情是要受到惩罚的。</p>
+<p>那一年我六岁了，农村里根本没有小中大班。我背起了书包跟着村里的大哥哥，大姐姐们一起跑去上学了。书包是那种泛黄的老旧斜挎包，那一天当我经过一个邻居家的时候，一群人在那里聊天，他们看到我背着书包去上学，便跟我开起了玩笑，他们拿了一点糖给我，对我说，上学有什么好玩的，不如留在这里陪他们一起玩。小孩子看到有糖吃，当然非常高兴。我就留在那里，等到中午我就背着书包慢悠悠的回到了家。以后的日子里，我经常留在那里玩，玩到中午再回家。但是最后有人告诉了我爸妈，结果免不了又是一顿训斥。再以后我就老老实实地去上学了。</p>
+<p>七岁对我来说是一个伤心的年纪，外公在那一年去世了。我对外公几乎没有印象。只是依稀记得我在幼儿园的一天，外公来到我的学校。他给我带了很多煮鸡蛋。再然后就是他去世的时候了，我妈是家里最大的女儿，当时我最小的舅舅高中还没有毕业。外公去世后好像没有多久，舅舅们就开始分家了。我最小的舅舅也就辍学回家了。随着我年龄的增长，每次去外婆家，外婆都要跟我讲很多她不幸的遭遇。那时起，我便对舅舅们有一种仇恨的情绪。七岁的我，第一次体会到失去亲人的滋味。虽然印象不算深刻，但是伤心之情直至现在依然记得。</p>
+<p>小学的日子，过得飞快。对我来说，最喜欢的就是暑假。因为可以泡在我家的鱼塘里。我就是当年的鱼塘小公子。傍晚的时候我会帮爷爷奶奶烧晚饭，农村里的锅灶是有烟囱的，我们烧的是割麦子和稻子留下来的秸秆。烧完火，你会浑身是汗，脸上，身上到处都是脏兮兮的。而我便有了跳进河中游泳的借口。痛痛快快地喊上村里的小伙伴们一起去河里游泳。游完泳，回去吃晚饭，一家五口人坐在一起，其乐融融。平时周末，我还会跟着爷爷去田间割草，爷爷那个时候非常喜欢养羊，跟着他一起出去割草，可以听他讲故事。爷爷在我奶奶家做过工，奶奶的父亲是私塾先生，见他生性淳厚，让他在私塾里听过一段时间课。所以爷爷肚子里会有一些故事，但是到我三年级的时候，就没有新故事讲给我听了。爷爷算是我语文启蒙老师了。以后我喜欢看书大概跟这个也有些许关系。</p>
+<p>小学结束，我开心的童年也就宣告结束了。因为要去镇上上学了。镇上离家有十几里路。平时只能住在镇上了，周末才能回家。那一年我13岁。爸爸妈妈托关系，才将我弄到镇上读书。因为镇中学对于不同村的学生是有名额的。在这里我遇到了很多好朋友，虽然不能在父母身边，却多了更多的自由。下晚自习，骑着车子追逐一起下自习的女同学。晚上饿的时候，跟自己的好朋友去学校外的小饭馆下一碗面，就着电视里的射雕英雄传，咒骂着学校里对自己不好的老师。有的时候我们还会溜去学校对面的录像厅里看录像。当然初中的时候，也是情窦初开的时候，小伙伴互相帮忙向自己喜欢的女孩子那里传递情书。几个小伙伴也尝试着学着大人躲在厕所里抽烟。学校里水泥乒乓球台，也是我们为数不多的娱乐活动之一。</p>
+<p>初中也在紧张的中考中过去了，同学互相在对方的记录本上留下祝福的话语。没有选择读书的小伙伴就开始打工了。考得不好的同学就选择一些技校。我考得不好不烂，进入县城继续读高中。从小学到大学我一直都不知道读书有什么意义，也一直思考这个问题。但是这个问题对我来说太难了。我不知道记下那些化学方程式有什么用？更不知道计算物体做功的大小，以及各种能有什么用，数学中那些公式背下来，解几道题目胜出的意义到底在哪里？一直抵触这样的学习。但是没有办法，做为孩子不上学能做什么呢？直到有一天，我一个屌炸天的英语老师给我很大的启发，因为他竟然泡我们高中的女同学。这一下子让我找到了学习的意义。只要想想我们的英语老师，学习便有了些许动力。当然，这位英语老师结果还是被他的老婆发现，最后以离婚收场。好吧，这个故事只是博读到这里的朋友一笑。真正带给我启发的是高中那位梳着中分的帅气语文老师。有一次上语文课，他朗读了梁实秋的一首诗，生不知何从来，死不知何处去，所谓生死只是人世间短短的一阙。我便好像理解了人生的意义。这也是记忆中唯一能记得老师留给我的东西，直到今天我都没有忘记。</p>
+<p>高中很快也来到了终点，高三我经常生病，成绩也不好。我想我可能要跟学校说再见了。家里也做好了复读的打算，反正年龄也小。结果高考跟中考一样不好不烂，上了一所本科。读的是我他妈见也没见过的计算机。因为大伯作为家里了不起的大学生，告诉我，还有我的父母。计算机将来比较好就业。我就这样选择了这个我都不知道是啥的专业。结果这个专业救了我，要不然我都不知道怎么就业。到了大学就更肆无忌惮了，你都不知道那些老师在讲些什么。我便发挥了小学就有的本事，逃课。在我们宿舍逃课我也只能排第二，因为还有一个更牛逼的同学几乎没上过一节课。大学最美妙的事情，我觉得就是可以公开谈恋爱了。那时的我们不会考虑家庭，不会考虑你有车，有房。只要你有情怀，还是会有姑娘看上你的。</p>
+<p>四年，现在看来仿佛就是一刹那间。在笑中，哭中，醉中度过了。那时MSN还没有退出中国，我有一天在MSN上遇到一位大姐姐。她漂亮，性感。写得一手好文章。我看了所有她在MSN上面的文章。她在上海工作，文章里记录了她在上海的点点滴滴。那时我便有了去上海工作的冲动。结果真的来到了上海，在这里一呆就已经八年了。在这里我碰到了我的妻子，在这里我成家立业，有了自己的女儿。生活有的时候就真的这么奇妙，就像阿甘说的，你永远不知道下次拿的是什么巧克力。</p>
+<p>终于也来到了三十这样的年纪，刚上大学觉得这个年纪是多么的遥不可及。原来是那么的触手可及。每个阶段的经历串联起我的这三十年。而立之年之后更要懂得生活平淡的意义。希望自己多一份包容，改正一些自己的脾气。</p>
+<p>三十，你好。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -143,13 +108,13 @@
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/技术/">技术</a>
+  <a class="article-category-link" href="/categories/生活/">生活</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/技术/">技术</a>
+  <span></span> <a href="/tags/生活/">生活</a>
   </div>
 
 </div>
@@ -157,7 +122,7 @@
 
 <div class="article-share" id="share">
 
-  <div data-url="http://ruhaishuo.com/2014/12/30/cookie-session-introduction/" data-title="cookie和session介绍 | 生活·工作·娱乐" data-tsina="1248213271" class="share clearfix">
+  <div data-url="http://ruhaishuo.com/2015/02/03/hello-30/" data-title="三十,你好 | 生活·工作·娱乐" data-tsina="1248213271" class="share clearfix">
   </div>
 
 </div>
@@ -166,19 +131,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2015/01/04/books-of-2014/" title="2014书籍推荐">
-  <strong>上一篇：</strong><br/>
-  <span>
-  2014书籍推荐</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2014/12/28/yi-bu-zhi-yao/"  title="一步之遥观后感">
+<a href="/2015/01/04/books-of-2014/"  title="2014书籍推荐">
  <strong>下一篇：</strong><br/> 
- <span>一步之遥观后感
+ <span>2014书籍推荐
 </span>
 </a>
 </div>
@@ -197,7 +154,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么要设计cookie"><span class="toc-number">1.</span> <span class="toc-text">为什么要设计cookie</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#直观显示cookie"><span class="toc-number">2.</span> <span class="toc-text">直观显示cookie</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何生成cookie"><span class="toc-number">3.</span> <span class="toc-text">如何生成cookie</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#在客户端生成cookie"><span class="toc-number">3.1.</span> <span class="toc-text">在客户端生成cookie</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在服务器端生成cookie"><span class="toc-number">3.2.</span> <span class="toc-text">在服务器端生成cookie</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cookie属性分析"><span class="toc-number">4.</span> <span class="toc-text">cookie属性分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么要设计session"><span class="toc-number">5.</span> <span class="toc-text">为什么要设计session</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#session的实现"><span class="toc-number">6.</span> <span class="toc-text">session的实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cookie和session的应用"><span class="toc-number">7.</span> <span class="toc-text">cookie和session的应用</span></a></li></ol>
+ 
  
   </div>
 
