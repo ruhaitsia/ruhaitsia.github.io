@@ -4,7 +4,7 @@
   <subtitle><![CDATA[独立思考，热爱分享，微信公众号［如海说］]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://ruhaishuo.com/"/>
-  <updated>2015-03-24T14:26:09.249Z</updated>
+  <updated>2015-03-25T15:04:00.716Z</updated>
   <id>http://ruhaishuo.com/</id>
   
   <author>
@@ -13,6 +13,73 @@
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[现代web应用]]></title>
+    <link href="http://ruhaishuo.com/2015/03/24/web-application/"/>
+    <id>http://ruhaishuo.com/2015/03/24/web-application/</id>
+    <published>2015-03-24T14:02:20.000Z</published>
+    <updated>2015-03-25T15:03:49.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://7te8l5.com1.z0.glb.clouddn.com/web.png" alt="web"></p>
+<blockquote>
+<p>这篇文章既是一篇关于web应用的科普文章，也是我对web应用开发的一次总结。内容从web应用产生的原因谈起，继而谈到在web应用的开发过程中需要用到的一系列技术，最后列出目前我们应用得比较广泛的一些技术。</p>
+</blockquote>
+<h2 id="现代web应用的产生">现代web应用的产生</h2>
+<p>现代web应用的产生主要得益于上世纪计算机领域的一系列发明。其中比较重要的有HTML(超文本标记语言)，Javascript语言，CSS样式，HTTP协议，基于HTTP协议的web服务器，浏览器，数据库系统，当然更低层次的还有我们熟知的计算机网络模型。所有这些技术的出现，使得大规模web应用的出现成为可能。</p>
+<p>HTML语言的发明，让我们可以用统一的语言来描述富文本(文字，图片以及视频)。这样全世界的开发人员都可以使用同一种语言描述富文本。W3C组织负责HTML标准的建立和推广，为web应用的出现打下了很好的根基。到目前为止，HTML语言的版本已经到了5。</p>
+<p>我们有了HTML语言，可以用它标识富文本。但是这些富文本如何呈现给最终用户呢？伟大的科学家们发明了浏览器。浏览器的发明使得文本能够更好地呈现给用户。在我们目前用到的主流浏览器IE，Firefox，Chrome之外，其实还有很多不为大众熟知的浏览器。譬如Linux平台下的lynx浏览器，Mac平台下的Safari等等。</p>
+<p>有了浏览器和超文本标记语言，文本可以方便地呈现出来。但是我们看到的依然是静态的文本。这些文本没有办法“动”起来。譬如说你想鼠标点击一下浏览器的某个区域，然后弹出一个对话框，还没法做到。作为世界上第一个流行的浏览器navigator的开发公司，网景，他们招聘来一名工程师，名叫布兰登。他开发了一门语言，最后被命名为Javascript。Javascript的出现极大地丰富了超文本的表现形式。那些文本从此可以“动”起来了。虽然微软也发明自己的脚本语言用来对抗Javascript。但是最终还是Javascript赢得了比赛的胜利，成为事实上的标准。</p>
+<p>浏览器和HTML加上Javascript语言让文本能够生动地呈现在用户面前。但是我们如何将这些文本呈现给千千万万的用户面前呢？超文本传输协议的出现解决了这一问题。超文本传输协议(http)定义了数据传输的方式，它是客户端和服务器端请求和应答的标准。浏览器是客户端的一种，基于http协议的服务器就是服务端。我们将超文本存放在服务器端，客户端请求访问这些资源，服务器以特定的格式返回这些资源给客户端。</p>
+<p>CSS的出现，让原本“动”起来的网页能够产生更加生动的效果。借助CSS我们可以创造和设计出更富有表现力的页面。</p>
+<p>上面描述的这些技术是现代web应用产生的基础。客户端通过浏览器向服务器端请求资源，服务器根据接受到的请求发送相应的资源给客户端。HTML语言帮助我们在浏览器显示从服务器端发送过来的数据。Javascript以及CSS让这些文本变得更加生动。</p>
+<h2 id="现代web应用中涉及的技术">现代web应用中涉及的技术</h2>
+<p>我们在前文阐述了现代web应用产生所涉及到的一系列发明。我们可以将它们分为客户端和服务器端。那么我们这节所要谈到的技术就分为两个方面，一个围绕客户端，另一个围绕服务器端。</p>
+<p>客户端需要解决的是如何将从服务端接收到的数据很好地展现在浏览器中。服务端要解决的问题是如何接受客户端的请求，以及以什么样的方式寻找数据然后返回给客户端。</p>
+<p>围绕客户端的主流技术有如下列表</p>
+<ol>
+<li>HTML语言</li>
+<li>CSS</li>
+<li>Javascript</li>
+<li>DOM API</li>
+<li>JQuery</li>
+<li>AngularJS</li>
+<li>ReactJS</li>
+<li>CommonJS</li>
+<li>ECMAScript标准<br>…</li>
+</ol>
+<p>围绕服务器端的主流技术有如下列表</p>
+<ol>
+<li>Java以及围绕Java的一系列框架spring/spring x(x代表基于spring framework的其他框架)/Hibernate/ibatis/…</li>
+<li>Go</li>
+<li>NodeJS</li>
+<li>C#</li>
+<li>服务器集群技术</li>
+<li>服务器负载均衡技术</li>
+<li>服务器端缓存技术</li>
+<li>数据库</li>
+<li>消息中间件</li>
+<li>云平台<br>…</li>
+</ol>
+<blockquote>
+<p>以上只是我所了解的一些技术列表</p>
+</blockquote>
+<h2 id="最近流行的技术">最近流行的技术</h2>
+<p>从前端来看，JQuery的出现极大地方便了开发人员与DOM元素打交道。但是JQuery出现后前端领域沉寂了很久一直没有新的技术出现。直到一系列的MVC框架出现。AngularJS的出现让数据和视图之间的协作更加方便。React的出现重新定义了web组件。这两个技术目前比较流行。但是JQuery依然占有很大的市场。</p>
+<p>从后端来看，NodeJS以及围绕它的一系列框架将Javascript语言推到了一个新的高度。越来越多的创业团队以及大公司采用NodeJS平台搭建自己的项目。Go语言的出现重新抽象了并发问题。目前比较火的Docker平台使用该语言开发。Go语言社区也在开发自己的web框架。</p>
+<h2 id="总结">总结</h2>
+<p>以上是我对现代web应用的一些梳理。将脑中的东西落到文章中才发现并不容易。希望自己能够坚持多写写技术方面的文章。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="http://7te8l5.com1.z0.glb.clouddn.com/web.png" alt="web"></p>
+<blockquote>
+<p>这篇文章既是一篇关于web应用的科普文章，也是我对web应用开发的一次总结。内容从web应用产生的]]>
+    </summary>
+    
+      <category term="技术" scheme="http://ruhaishuo.com/tags/%E6%8A%80%E6%9C%AF/"/>
+    
+      <category term="技术" scheme="http://ruhaishuo.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[与人方便，自己方便]]></title>
