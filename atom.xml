@@ -4,7 +4,7 @@
   <subtitle><![CDATA[独立思考，热爱分享，微信公众号［如海说］]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://ruhaishuo.com/"/>
-  <updated>2015-03-25T15:04:00.716Z</updated>
+  <updated>2015-03-30T14:17:59.915Z</updated>
   <id>http://ruhaishuo.com/</id>
   
   <author>
@@ -13,6 +13,37 @@
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[ConEmu和Putty]]></title>
+    <link href="http://ruhaishuo.com/2015/03/30/conemu-putty/"/>
+    <id>http://ruhaishuo.com/2015/03/30/conemu-putty/</id>
+    <published>2015-03-30T13:34:20.000Z</published>
+    <updated>2015-03-30T14:15:30.000Z</updated>
+    <content type="html"><![CDATA[<p>最近一直在Windows平台下访问AWS的ec2服务器。putty作为一款远程连接利器可以帮助我们很方便地连接ec2服务器。但是如果有很多台服务器需要管理，而且每次都需要key文件进行远程连接，putty就显得不是很方便了。我们今天要介绍一款同样免费的软件，它可以配合putty一起使用，这样就可以在Windows平台下同时管理很多台服务器。</p>
+<p>软件叫<a href="https://code.google.com/p/conemu-maximus5/" target="_blank" rel="external">ConEmu</a>。下面我们就来演示怎么利用ConEmu和putty配合进行远程主机连接。相信你在Windows平台下一定会喜欢上这样的组合。</p>
+<h2 id="下载并安装putty和ConEmu">下载并安装putty和ConEmu</h2>
+<p>自行搜索并且安装。</p>
+<h2 id="配置putty">配置putty</h2>
+<p>按照下图所示，保存你的会话连接，如果需要添加key文件，展开ssh,然后导入你的文件。最后记得点击保存按钮。</p>
+<p><img src="http://7te8l5.com1.z0.glb.clouddn.com/conemu-putty1.gif" alt="putty"></p>
+<h2 id="配置ConEmu">配置ConEmu</h2>
+<p>打开ConEmu软件，找到设置。在startup下面有一个叫做tasks的选项。点击tasks选项，然后你就可以添加相应的task。</p>
+<p><img src="http://7te8l5.com1.z0.glb.clouddn.com/conemu-putty2.gif" alt="ConEmu"></p>
+<p>你需要配置如下参数<br>Task Name : Putty(可以自己根据需要填写)<br>Task Parameters : 不需要填写<br>Commands : putty.exe -new_console -load “yoursavedsession”</p>
+<p>配置好参数，点击保存按钮。在你创建新的连接时就可以直接调用它。</p>
+<p><img src="http://7te8l5.com1.z0.glb.clouddn.com/conemu-putty3.gif" alt="连接"></p>
+<p>非常赞的组合吧，赶紧尝试一下吧。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>最近一直在Windows平台下访问AWS的ec2服务器。putty作为一款远程连接利器可以帮助我们很方便地连接ec2服务器。但是如果有很多台服务器需要管理，而且每次都需要key文件进行远程连接，putty就显得不是很方便了。我们今天要介绍一款同样免费的软件，它可以配合put]]>
+    </summary>
+    
+      <category term="工具" scheme="http://ruhaishuo.com/tags/%E5%B7%A5%E5%85%B7/"/>
+    
+      <category term="工具" scheme="http://ruhaishuo.com/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[现代web应用]]></title>
